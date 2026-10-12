@@ -82,7 +82,7 @@
 .adfg-menu-btn{display:none;align-items:center;gap:10px;min-height:44px;padding:8px 14px;background:rgba(18,18,18,0.7);color:#ffffff;border:1px solid rgba(255,255,255,0.22);border-radius:10px;font-family:var(--adfg-head);font-weight:400;font-size:14px;line-height:1.2;cursor:pointer}
 .adfg-menu-btn::before{content:"";width:18px;height:12px;background:linear-gradient(#ffffff,#ffffff) 0 0/100% 2px no-repeat,linear-gradient(#ffffff,#ffffff) 0 5px/100% 2px no-repeat,linear-gradient(#ffffff,#ffffff) 0 10px/100% 2px no-repeat}
 .adfg-header.adfg-js .adfg-menu-btn{display:inline-flex}
-.adfg-header.adfg-js{position:sticky;top:0}
+.adfg-header.adfg-js{top:auto}
 .adfg-nav{width:100%;padding:8px 0 4px}
 .adfg-header.adfg-js .adfg-nav{display:none}
 .adfg-header.adfg-js.adfg-open .adfg-nav{display:block}
@@ -94,7 +94,7 @@
 .adfg-sub a{padding:7px 0;font-size:15px;color:#d6d3cf}
 @media (min-width:1080px){
 .adfg-menu-btn,.adfg-header.adfg-js .adfg-menu-btn{display:none}
-.adfg-header{position:sticky;top:0}
+.adfg-header{top:auto}
 .adfg-nav,.adfg-header.adfg-js .adfg-nav{display:flex;flex:1;align-items:center;width:auto;padding:0}
 .adfg-nav-list{flex-direction:row;align-items:center;gap:2px;padding:5px 8px;border:1px solid rgba(255,255,255,0.2);border-radius:12px;background:rgba(18,18,18,0.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .adfg-s .adfg-nav-list{margin:0 auto}
@@ -243,6 +243,7 @@
 .adfg-table td.adfg-td-num{white-space:nowrap}
 .adfg-table td.adfg-td-after{font-weight:700;color:var(--adfg-text)}
 .adfg-table tbody th{font-weight:600;color:var(--adfg-text)}
+@media (max-width:599px){.adfg-table-wrap{padding:4px 10px}.adfg-table{font-size:14px}.adfg-table th,.adfg-table td{padding:10px 6px}}
 
 /* ramka "w skrocie" */
 .adfg-facts{display:grid;gap:0;margin:0 0 24px;border-top:1px solid var(--adfg-line-strong)}
@@ -382,26 +383,243 @@
 @media (prefers-reduced-motion:reduce){.adfg-faq summary::after,.adfg-btn,.adfg-logo-tile img{transition:none}}
 .adfg-glow-b,.adfg-cta,.adfg-hero{overflow:hidden}
 .adfg-team{isolation:isolate}
+
+/* ===== runda 3: naglowek jak na adforge.pl (przezroczysty nad hero) ===== */
+.adfg-header{--wp--spacing--top:18px;--wp--spacing--bottom:18px;background:transparent;z-index:60;position:relative}
+.adfg-header.adfg-js{position:absolute;left:0;right:0}
+.adfg-header.adfg-js.adfg-fixed{position:fixed;top:0;background:rgba(0,0,0,0.88);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.1);--wp--spacing--top:10px;--wp--spacing--bottom:10px}
+.adfg-logo img{height:44px}
+.adfg-menu-btn{width:48px;height:48px;padding:0;justify-content:center;border-radius:12px}
+.adfg-menu-btn::before{transition:transform 0.2s ease}
+.adfg-header.adfg-open .adfg-menu-btn::before{background:linear-gradient(#ffffff,#ffffff) 0 5px/100% 2px no-repeat;transform:rotate(45deg)}
+.adfg-header.adfg-open .adfg-menu-btn::after{content:"";position:absolute;width:18px;height:2px;background:#ffffff;transform:rotate(-45deg)}
+.adfg-menu-btn{position:relative}
+.adfg-header.adfg-js .adfg-nav{position:absolute;left:0;right:0;top:calc(100% + 4px);padding:14px 18px;background:rgba(8,8,8,0.97);border:1px solid rgba(255,255,255,0.16);border-radius:14px;width:auto;box-sizing:border-box}
+@media (min-width:1080px){
+.adfg-header{position:absolute;left:0;right:0}
+.adfg-header.adfg-js .adfg-nav{position:static;padding:0;background:transparent;border:0;border-radius:0}
+.adfg-nav-list{background:rgba(14,14,14,0.55)}
+}
+.adfg-hero{--wp--spacing--top:132px}
+@media (min-width:960px){.adfg-hero{--wp--spacing--top:190px}}
+
+/* ===== karuzela (logotypy, hasla) ===== */
+.adfg-marquee{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%)}
+.adfg-marquee:focus-visible{outline:3px solid #ff7a3d;outline-offset:4px}
+.adfg-marquee-track{display:flex;width:max-content;animation:adfg-marquee 48s linear infinite;will-change:transform}
+.adfg-marquee--slow .adfg-marquee-track{animation-duration:70s}
+.adfg-marquee:hover .adfg-marquee-track,.adfg-marquee:focus-within .adfg-marquee-track,.adfg-marquee-wrap.adfg-paused .adfg-marquee-track{animation-play-state:paused}
+.adfg-marquee .adfg-logos{flex-wrap:nowrap;max-width:none;gap:0 56px;padding-right:56px;margin:0;justify-content:flex-start}
+.adfg-s .adfg-marquee .adfg-logos{margin:0;padding:0 56px 0 0}
+@keyframes adfg-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.adfg-marquee-wrap{position:relative}
+.adfg-marquee-btn{display:none;margin:18px auto 0;align-items:center;gap:8px;min-height:40px;padding:6px 16px;background:rgba(14,14,14,0.7);color:#e8e6e1;border:1px solid rgba(255,255,255,0.22);border-radius:999px;font-family:var(--adfg-body);font-size:14px;line-height:1.3;cursor:pointer}
+.adfg-marquee-btn:hover{border-color:#df6c37}
+.adfg-marquee-wrap.adfg-js .adfg-marquee-btn{display:flex}
+.adfg-ticker{--wp--spacing--top:28px;--wp--spacing--bottom:28px;border-top:1px solid var(--adfg-line);border-bottom:1px solid var(--adfg-line);background:#000000}
+.adfg-ticker-list{display:flex;flex-wrap:nowrap;align-items:center;gap:0 44px;padding-right:44px;margin:0}
+.adfg-s .adfg-ticker-list{margin:0;padding:0 44px 0 0}
+.adfg-ticker-list li{display:flex;align-items:center;gap:44px;white-space:nowrap;font-family:var(--adfg-head);font-weight:300;font-size:clamp(1.2rem,1rem + 1vw,2rem);line-height:1.3;color:#f2f0ec}
+.adfg-ticker-list li::after{content:"";width:10px;height:10px;border-radius:50%;background:#df6c37;flex:0 0 10px}
+.adfg-ticker .adfg-marquee-btn{margin-top:14px}
+
+/* ===== bento ===== */
+.adfg-bento{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:640px){.adfg-bento{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1024px){.adfg-bento{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(200px,auto);grid-auto-flow:dense}.adfg-bento-tile--wide{grid-column:span 2}.adfg-bento-tile--tall{grid-row:span 2}}
+.adfg-bento-tile{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;min-height:200px;padding:26px 24px;background:#070707;border:1px solid var(--adfg-line);border-radius:14px;box-sizing:border-box}
+.adfg-bento-tile--glow{background:linear-gradient(rgba(6,6,6,0.35),rgba(6,6,6,0.35)),url("img/gradient_sekcje-01.webp") left bottom/cover no-repeat,#070707}
+.adfg-bento-tile--photo{padding:0;justify-content:flex-end;min-height:260px}
+.adfg-bento-tile--photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:brightness(0.62)}
+.adfg-bento-tile--photo .adfg-bento-cap{padding:22px 24px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.85))}
+.adfg-bento-num{display:block;font-family:var(--adfg-head);font-weight:500;font-size:clamp(2.2rem,1.6rem + 2.2vw,3.6rem);line-height:1.05;letter-spacing:-0.02em;color:#df6c37;margin:0 0 8px;white-space:nowrap}
+.adfg-bento-num .adfg-unit{font-size:0.45em}
+.adfg-bento-tile p{margin:0;color:var(--adfg-body-c);font-size:15px;line-height:1.55}
+.adfg-bento-tile .adfg-h3{color:#ffffff}
+.adfg-bento-quote{font-family:var(--adfg-head);font-weight:300;font-size:clamp(1.05rem,0.95rem + 0.5vw,1.35rem);line-height:1.5;color:#ffffff;margin:0 0 14px}
+.adfg-bento-ico{width:64px;height:64px;margin:0 0 auto;display:block}
+.adfg-bars{display:flex;align-items:flex-end;gap:18px;height:150px;margin:0 0 14px;padding:0 4px;border-bottom:1px solid var(--adfg-line-strong)}
+.adfg-bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;height:100%;font-size:13px;line-height:1.3;color:var(--adfg-muted);text-align:center}
+.adfg-bar i{display:block;width:100%;max-width:90px;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#ff7a3d,#7a2e10);transform-origin:bottom}
+.adfg-bar b{font-family:var(--adfg-head);font-weight:500;color:#ffffff;font-size:15px}
+
+/* ===== os czasu ===== */
+.adfg-timeline{position:relative;display:grid;gap:28px;counter-reset:adfgtl}
+.adfg-s .adfg-timeline{margin:0;padding:0 0 0 30px}
+.adfg-timeline::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,#df6c37,rgba(223,108,55,0.15))}
+.adfg-tl-item{position:relative;counter-increment:adfgtl}
+.adfg-tl-item::before{content:"";position:absolute;left:-30px;top:4px;width:18px;height:18px;border-radius:50%;background:#000000;border:2px solid #df6c37;box-shadow:0 0 0 5px rgba(223,108,55,0.15);box-sizing:border-box}
+.adfg-tl-time{display:inline-block;font-family:var(--adfg-head);font-weight:500;font-size:clamp(1.3rem,1.1rem + 0.8vw,1.9rem);line-height:1.15;color:#df6c37;margin:0 0 6px}
+.adfg-tl-item .adfg-h3{margin-bottom:6px}
+.adfg-tl-glow{display:none}
+@media (min-width:900px){
+.adfg-timeline{grid-auto-flow:column;grid-auto-columns:1fr;gap:28px}
+.adfg-s .adfg-timeline{padding:42px 0 0}
+.adfg-timeline::before{left:0;right:0;top:8px;bottom:auto;width:auto;height:2px;background:linear-gradient(90deg,#df6c37,rgba(223,108,55,0.2))}
+.adfg-tl-item::before{left:0;top:-42px}
+.adfg-tl-glow{display:block;position:absolute;left:0;right:0;top:0;height:18px;overflow:hidden;pointer-events:none}
+.adfg-tl-glow::after{content:"";position:absolute;top:8px;left:0;width:22%;height:2px;background:linear-gradient(90deg,rgba(255,180,120,0),#ffd2b0,rgba(255,180,120,0));animation:adfg-tl-run 6s ease-in-out infinite;will-change:transform}
+}
+@keyframes adfg-tl-run{0%{transform:translate3d(-110%,0,0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translate3d(480%,0,0);opacity:0}}
+
+/* ===== zakladki bez JS (radio) ===== */
+.adfg-tabs{position:relative}
+.adfg-tab-in{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.adfg-tab-list{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:max-content;max-width:100%;margin:0 auto 36px;padding:6px;border:1px solid rgba(255,255,255,0.2);border-radius:14px;background:rgba(14,14,14,0.7);box-sizing:border-box}
+.adfg-tab-lab{display:inline-flex;align-items:center;min-height:44px;padding:8px 20px;border-radius:10px;font-family:var(--adfg-head);font-weight:400;font-size:15px;line-height:1.3;color:#e8e6e1;cursor:pointer}
+.adfg-tab-lab:hover{background:rgba(255,255,255,0.07)}
+.adfg-tab-panel{display:none}
+.adfg-tab-in--a:checked~.adfg-tab-list .adfg-tab-lab--a,.adfg-tab-in--b:checked~.adfg-tab-list .adfg-tab-lab--b{background:#c4521f;color:#ffffff}
+.adfg-tab-in--a:focus-visible~.adfg-tab-list .adfg-tab-lab--a,.adfg-tab-in--b:focus-visible~.adfg-tab-list .adfg-tab-lab--b{outline:3px solid #ff7a3d;outline-offset:2px}
+.adfg-tab-in--a:checked~.adfg-tab-panel--a,.adfg-tab-in--b:checked~.adfg-tab-panel--b{display:block}
+
+/* ===== tabela porownawcza wierszowa ===== */
+.adfg-rows{width:100%;border-collapse:separate;border-spacing:0 10px;font-size:15px;line-height:1.55}
+.adfg-rows caption{text-align:center;font-size:14px;color:var(--adfg-muted);padding:0 0 6px}
+.adfg-rows thead th{font-family:var(--adfg-head);font-weight:400;font-size:16px;text-align:left;padding:0 18px 4px;color:var(--adfg-muted)}
+.adfg-rows thead th:last-child{color:#df6c37}
+.adfg-rows td{padding:16px 18px;vertical-align:top;background:#070707;border-top:1px solid var(--adfg-line);border-bottom:1px solid var(--adfg-line)}
+.adfg-rows td:first-child{border-left:1px solid var(--adfg-line);border-radius:12px 0 0 12px;color:var(--adfg-muted)}
+.adfg-rows td:last-child{border-right:1px solid rgba(223,108,55,0.45);border-radius:0 12px 12px 0;color:#f2f0ec;background:linear-gradient(90deg,rgba(223,108,55,0.08),rgba(223,108,55,0.02)),#070707}
+.adfg-rows td:first-child::before{content:"";display:inline-block;width:14px;height:14px;margin-right:10px;vertical-align:-2px;background:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNiAxNic+PHBhdGggZD0nTTMuNSAzLjVsOSA5TTEyLjUgMy41bC05IDknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2ZmNWM1Yycgc3Ryb2tlLXdpZHRoPScyLjInIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPjwvc3ZnPg==") center/contain no-repeat}
+.adfg-rows td:last-child::before{content:"";display:inline-block;width:14px;height:14px;margin-right:10px;vertical-align:-2px;background:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNiAxNic+PHBhdGggZD0nTTIuNSA4LjVsMy42IDMuNkwxMy41IDQnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2RmNmMzNycgc3Ryb2tlLXdpZHRoPScyLjInIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCcvPjwvc3ZnPg==") center/contain no-repeat}
+@media (max-width:719px){.adfg-rows thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.adfg-rows tr{display:block;margin:0 0 12px}.adfg-rows td{display:block;border-radius:0}.adfg-rows td:first-child{border-radius:12px 12px 0 0;border-right:1px solid var(--adfg-line)}.adfg-rows td:last-child{border-radius:0 0 12px 12px;border-left:1px solid rgba(223,108,55,0.45)}}
+
+/* ===== sekcja sticky ===== */
+.adfg-sticky{display:grid;gap:32px;align-items:start}
+.adfg-sticky-list{display:grid;gap:16px}
+.adfg-sticky-item{padding:26px 24px;background:#070707;border:1px solid var(--adfg-line);border-radius:14px}
+.adfg-sticky-item .adfg-h3{color:#df6c37}
+.adfg-sticky-num{display:block;font-family:var(--adfg-head);font-weight:500;font-size:14px;line-height:1.3;color:var(--adfg-muted);margin:0 0 10px}
+@media (min-width:960px){.adfg-sticky{grid-template-columns:0.9fr 1.1fr;gap:64px}.adfg-sticky-side{position:sticky;top:110px}}
+
+/* ===== cytat spotlight ===== */
+.adfg-spot{position:relative;max-width:980px;margin:0 auto;padding:44px 32px;border:1px solid rgba(223,108,55,0.35);border-radius:18px;background:radial-gradient(90% 70% at 50% 120%,rgba(223,108,55,0.22),rgba(0,0,0,0) 70%),#060606;text-align:center;overflow:hidden;isolation:isolate}
+.adfg-spot::before{content:"\201E";position:absolute;left:24px;top:-34px;font-family:var(--adfg-head);font-size:200px;line-height:1;color:rgba(223,108,55,0.18);z-index:-1}
+.adfg-spot blockquote{margin:0 0 24px}
+.adfg-s .adfg-spot blockquote p{font-family:var(--adfg-head);font-weight:300;font-size:clamp(1.25rem,1rem + 1.2vw,2rem);line-height:1.45;color:#ffffff;margin:0}
+.adfg-spot figcaption{display:inline-flex;align-items:center;gap:12px;text-align:left;font-size:14px;line-height:1.4}
+.adfg-spot figcaption img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+@media (min-width:720px){.adfg-spot{padding:64px 72px}}
+
+/* ===== karta case study z nakladka liczb ===== */
+.adfg-ov{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;min-height:420px;border:1px solid var(--adfg-line);border-radius:14px;text-decoration:none;color:inherit}
+.adfg-ov>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 0.6s ease}
+.adfg-ov::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.6) 45%,rgba(0,0,0,0.94) 100%)}
+.adfg-ov:hover>img{transform:scale(1.04)}
+.adfg-ov-body{padding:26px 24px}
+.adfg-ov-nums{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
+.adfg-ov-num{padding:10px 14px;border:1px solid rgba(223,108,55,0.5);border-radius:10px;background:rgba(0,0,0,0.55)}
+.adfg-ov-num b{display:block;font-family:var(--adfg-head);font-weight:500;font-size:clamp(1.25rem,1.1rem + 0.6vw,1.6rem);line-height:1.15;color:#df6c37}
+.adfg-ov-num span{display:block;font-size:13px;line-height:1.35;color:#e8e6e1}
+.adfg-ov .adfg-h3{color:#ffffff}
+
+/* ===== przed / po ===== */
+.adfg-ba{display:grid;gap:16px}
+@media (min-width:860px){.adfg-ba{grid-template-columns:1fr 1fr}}
+.adfg-ba-col{padding:28px 26px;border-radius:14px;border:1px solid var(--adfg-line);background:#070707}
+.adfg-ba-col--after{border-color:rgba(223,108,55,0.5);background:linear-gradient(rgba(6,6,6,0.3),rgba(6,6,6,0.3)),url("img/gradient_sekcje-01.webp") left bottom/cover no-repeat,#070707}
+.adfg-ba-tag{display:inline-block;margin:0 0 16px;padding:4px 14px;border-radius:999px;font-family:var(--adfg-head);font-size:14px;line-height:1.4;border:1px solid var(--adfg-line-strong);color:var(--adfg-muted)}
+.adfg-ba-col--after .adfg-ba-tag{border-color:#df6c37;color:#ffffff;background:#c4521f}
+.adfg-ba-list li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--adfg-line);font-size:15px;line-height:1.45}
+.adfg-ba-list li:last-child{border-bottom:0}
+.adfg-ba-list b{font-family:var(--adfg-head);font-weight:500;color:#ffffff;white-space:nowrap}
+.adfg-ba-col--after .adfg-ba-list b{color:#df6c37}
+
+/* ===== karty wyboru sciezki ===== */
+.adfg-grid>li{display:flex;min-width:0}
+.adfg-path{position:relative;display:flex;flex-direction:column;flex:1;box-sizing:border-box;padding:26px 24px 70px;background:#070707;border:1px solid var(--adfg-line);border-radius:14px;text-decoration:none;color:inherit;transition:border-color 0.2s ease}
+.adfg-path:hover{border-color:rgba(223,108,55,0.6)}
+.adfg-path .adfg-h3{color:#df6c37}
+.adfg-path-ico{width:52px;height:52px;margin:0 0 18px}
+.adfg-path-go{position:absolute;right:20px;bottom:20px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(223,108,55,0.6);background:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNiAxNic+PHBhdGggZD0nTTYgM2w1IDUtNSA1JyBmaWxsPSdub25lJyBzdHJva2U9JyNkZjZjMzcnIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJy8+PC9zdmc+") center/16px no-repeat;transition:transform 0.2s ease}
+.adfg-path:hover .adfg-path-go{transform:translate3d(4px,0,0)}
+
+/* ===== plywajace przyciski ===== */
+.adfg-float{position:fixed;bottom:16px;z-index:40;margin:0}
+.adfg-cookies{left:16px}
+.adfg-totop{right:16px}
+.adfg-float-btn,.adfg-cookies summary{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:rgba(10,10,10,0.92);border:1px solid rgba(255,255,255,0.22);color:#ffffff;cursor:pointer;list-style:none;box-shadow:0 6px 18px rgba(0,0,0,0.5);transition:border-color 0.2s ease,transform 0.2s ease;box-sizing:border-box}
+.adfg-cookies summary::-webkit-details-marker{display:none}
+.adfg-float-btn:hover,.adfg-cookies summary:hover{border-color:#df6c37;transform:translate3d(0,-2px,0)}
+.adfg-float-btn svg,.adfg-cookies summary svg{width:22px;height:22px;display:block}
+.adfg-cookies-panel{position:absolute;left:0;bottom:60px;width:min(300px,calc(100vw - 32px));padding:16px 18px;background:#0b0b0b;border:1px solid rgba(255,255,255,0.2);border-radius:12px;font-size:14px;line-height:1.55;color:#e8e6e1;box-sizing:border-box}
+.adfg-s .adfg-cookies-panel p{margin:0}
+.adfg-totop.adfg-js{transition:opacity 0.25s ease,transform 0.25s ease}
+.adfg-totop.adfg-js:not(.adfg-show){opacity:0;transform:translate3d(0,12px,0);pointer-events:none}
+
+/* ===== animacje (tylko transform i opacity, petle bez skoku) ===== */
+@keyframes adfg-breathe{0%{opacity:0.35;transform:scale(1)}100%{opacity:0.75;transform:scale(1.08)}}
+@keyframes adfg-breathe-soft{0%{opacity:0.5;transform:scale(1) rotate(0deg)}100%{opacity:0.85;transform:scale(1.05) rotate(3deg)}}
+@keyframes adfg-sparks{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-240px,0)}}
+@keyframes adfg-float-y{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(0,-5px,0)}}
+@keyframes adfg-ico-in{from{opacity:0.35;transform:translate3d(0,16px,0) scale(0.85)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+@keyframes adfg-hammer{0%,100%{transform:rotate(0deg)}35%{transform:rotate(-24deg)}55%{transform:rotate(10deg)}75%{transform:rotate(-4deg)}}
+@keyframes adfg-flicker{0%,100%{transform:scale(1);opacity:1}25%{transform:scale(1.06,0.96);opacity:0.85}50%{transform:scale(0.97,1.05);opacity:1}75%{transform:scale(1.04,0.98);opacity:0.9}}
+@keyframes adfg-loupe{0%,100%{transform:translate3d(0,0,0)}25%{transform:translate3d(4px,-3px,0)}50%{transform:translate3d(0,-6px,0)}75%{transform:translate3d(-4px,-3px,0)}}
+@keyframes adfg-shake{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-7deg)}75%{transform:rotate(7deg)}}
+@keyframes adfg-turn{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes adfg-nudge{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(5px,0,0)}}
+@keyframes adfg-bounce{0%,100%{transform:translate3d(0,0,0)}40%{transform:translate3d(0,-7px,0)}70%{transform:translate3d(0,2px,0)}}
+.adfg-hero::before{content:"";position:absolute;left:-10%;bottom:-30%;width:70%;height:90%;background:url("img/gradient_elementy-03.webp") center/contain no-repeat;opacity:0.4;pointer-events:none;animation:adfg-breathe 9s ease-in-out infinite alternate;will-change:transform,opacity}
+.adfg-hero::after,.adfg-fx-sparks::after{content:"";position:absolute;left:0;right:0;top:0;height:calc(100% + 240px);background-image:radial-gradient(2px 2px at 12% 30%,rgba(255,190,120,0.9),transparent 60%),radial-gradient(1.5px 1.5px at 34% 72%,rgba(255,150,80,0.8),transparent 60%),radial-gradient(2px 2px at 58% 18%,rgba(255,200,140,0.85),transparent 60%),radial-gradient(1.5px 1.5px at 76% 56%,rgba(255,140,70,0.8),transparent 60%),radial-gradient(2px 2px at 90% 88%,rgba(255,190,120,0.75),transparent 60%),radial-gradient(1px 1px at 46% 94%,rgba(255,220,180,0.9),transparent 60%);background-size:240px 240px;background-repeat:repeat;opacity:0.55;pointer-events:none;animation:adfg-sparks 14s linear infinite;-webkit-mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.6) 45%,transparent 85%);mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.6) 45%,transparent 85%)}
+.adfg-fx-sparks{position:relative;overflow:hidden;border-radius:10px}
+.adfg-fx-sparks::after{opacity:0.45;animation-duration:11s}
+.adfg-card::before{animation:adfg-breathe-soft 11s ease-in-out infinite alternate}
+.adfg-card:nth-child(even)::before{animation-duration:13s}
+.adfg-card::after{content:"";position:absolute;left:0;right:0;bottom:-40%;height:80%;background:radial-gradient(50% 50% at 50% 50%,rgba(223,108,55,0.35),rgba(223,108,55,0) 70%);z-index:-1;pointer-events:none;animation:adfg-breathe 7s ease-in-out infinite alternate}
+.adfg-cta::before{animation:adfg-breathe 8s ease-in-out infinite alternate}
+.adfg-cta::after{animation:adfg-breathe 11s ease-in-out infinite alternate}
+.adfg-glow-b::before{animation:adfg-breathe 10s ease-in-out infinite alternate}
+.adfg-glow-b::after{animation:adfg-breathe 12s ease-in-out infinite alternate}
+.adfg-team::before{animation:adfg-breathe-soft 12s ease-in-out infinite alternate}
+.adfg-ico{display:inline-block;animation:adfg-ico-in linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+.adfg-ico img{display:block;animation:adfg-float-y 4s ease-in-out infinite alternate}
+.adfg-hov:hover .adfg-ico--hammer img{transform-origin:80% 80%;animation:adfg-hammer 0.9s ease-in-out infinite}
+.adfg-hov:hover .adfg-ico--fire img{animation:adfg-flicker 0.9s ease-in-out infinite}
+.adfg-hov:hover .adfg-ico--loupe img{animation:adfg-loupe 1.6s ease-in-out infinite}
+.adfg-hov:hover .adfg-ico--shake img{animation:adfg-shake 0.8s ease-in-out infinite}
+.adfg-hov:hover .adfg-ico--turn img{animation:adfg-turn 2.4s linear infinite}
+.adfg-hov:hover .adfg-ico--nudge img{animation:adfg-nudge 1s ease-in-out infinite}
+.adfg-hov:hover .adfg-ico--bounce img{animation:adfg-bounce 1s ease-in-out infinite}
+.adfg-bar i{animation:adfg-ico-in linear both;animation-timeline:view();animation-range:entry 0% cover 35%}
+@media (prefers-reduced-motion:reduce){
+.adfg-marquee-track,.adfg-hero::before,.adfg-hero::after,.adfg-fx-sparks::after,.adfg-card::before,.adfg-card::after,.adfg-cta::before,.adfg-cta::after,.adfg-glow-b::before,.adfg-glow-b::after,.adfg-team::before,.adfg-ico,.adfg-ico img,.adfg-bar i,.adfg-tl-glow::after,.adfg-hov:hover .adfg-ico img{animation:none}
+.adfg-marquee{-webkit-mask-image:none;mask-image:none}
+.adfg-marquee-track{width:auto;display:block}
+.adfg-marquee-track>[aria-hidden="true"]{display:none}
+.adfg-s .adfg-marquee .adfg-logos,.adfg-s .adfg-marquee .adfg-ticker-list{flex-wrap:wrap;justify-content:center;padding-right:0;gap:22px 44px}
+.adfg-marquee-btn,.adfg-marquee-wrap.adfg-js .adfg-marquee-btn{display:none}
+.adfg-ov>img,.adfg-path-go,.adfg-float-btn,.adfg-totop.adfg-js{transition:none}
+}
+.adfg-ico img{width:56px;height:56px}
+.adfg-ico--s52 img{width:52px;height:52px}
+.adfg-ico--s64 img{width:64px;height:64px}
+.adfg-bento .adfg-ico{margin:0 0 auto}
+.adfg-bar--64 i{height:64%}
+.adfg-bar--100 i{height:100%}
+.adfg-why-item .adfg-ico{grid-row:span 2}
+.adfg-card .adfg-ico{margin:0 0 16px}
 </style>
 </head>
 <body>
 <!-- MAKIETA-START -->
 <style>body{margin:0}</style>
-<p class="adfg-mk" role="note">Makieta poglądowa: propozycja wyglądu strony przygotowana przez Webly Mate. Formularze nie działają.</p>
+<p class="adfg-mk" role="note">Makieta poglądowa: propozycja wyglądu strony przygotowana przez Daniela Jeziorskiego. Formularze nie działają.</p>
 <!-- MAKIETA-END -->
 <a class="adfg-skip" href="#adfg-tresc">Przejdź do treści</a>
-<header class="wp-section alignfull adfg-s adfg-header" data-type="section-component"><div class="wp-content-wrap adfg-header-in" data-type="content-area-component"><a class="adfg-logo" href="index.html"><img src="img/logo-adforge-white.webp" alt="AdForge, strona główna" width="600" height="246" fetchpriority="high"></a><button class="adfg-menu-btn" type="button" aria-expanded="false" aria-controls="adfg-nav"><span class="adfg-menu-label">Menu</span></button><nav class="adfg-nav" id="adfg-nav" aria-label="Menu główne"><ul class="adfg-nav-list"><li class="adfg-has-sub"><a href="uslugi.html">Usługi</a><ul class="adfg-sub"><li><a href="performance-marketing.html">Performance marketing</a></li><li><a href="google-ads-dla-e-commerce.html">Google Ads dla e-commerce</a></li><li><a href="meta-ads-dla-e-commerce.html">Meta Ads dla e-commerce</a></li><li><a href="cro.html">Optymalizacja konwersji (CRO)</a></li><li><a href="audyt.html" aria-current="page">Audyt e-commerce</a></li><li><a href="strategia.html">Zewnętrzny CMO i strategia</a></li></ul></li><li><a href="case-studies.html">Case studies</a></li><li><a href="o-nas.html">O nas</a></li><li><a href="opinie.html">Opinie</a></li><li><a href="https://adforge.pl/wiedza/">Wiedza</a></li></ul><a class="adfg-btn adfg-btn--sm" href="darmowa-konsultacja.html">Darmowa konsultacja</a></nav></div></header>
+<header class="wp-section alignfull adfg-s adfg-header" id="adfg-top" data-type="section-component"><div class="wp-content-wrap adfg-header-in" data-type="content-area-component"><a class="adfg-logo" href="index.html"><img src="img/logo-adforge-white.webp" alt="AdForge, strona główna" width="600" height="246" fetchpriority="high"></a><button class="adfg-menu-btn" type="button" aria-expanded="false" aria-controls="adfg-nav"><span class="adfg-menu-label adfg-vh">Menu</span></button><nav class="adfg-nav" id="adfg-nav" aria-label="Menu główne"><ul class="adfg-nav-list"><li class="adfg-has-sub"><a href="uslugi.html">Usługi</a><ul class="adfg-sub"><li><a href="performance-marketing.html">Performance marketing</a></li><li><a href="google-ads-dla-e-commerce.html">Google Ads dla e-commerce</a></li><li><a href="meta-ads-dla-e-commerce.html">Meta Ads dla e-commerce</a></li><li><a href="cro.html">Optymalizacja konwersji (CRO)</a></li><li><a href="audyt.html" aria-current="page">Audyt e-commerce</a></li><li><a href="strategia.html">Zewnętrzny CMO i strategia</a></li></ul></li><li><a href="o-nas.html">O nas</a></li><li><a href="opinie.html">Opinie</a></li><li><a href="https://adforge.pl/wiedza/">Wiedza</a></li></ul><a class="adfg-btn adfg-btn--sm" href="darmowa-konsultacja.html">Darmowa konsultacja</a></nav></div></header>
 <main id="adfg-tresc" tabindex="-1">
 <section class="wp-section alignfull adfg-s adfg-hero adfg-hero--photo adfg-bg-mapa" data-type="section-component"><div class="wp-content-wrap" data-type="content-area-component"><nav class="adfg-crumbs" aria-label="Ścieżka nawigacji"><ol><li><a href="index.html">Strona główna</a></li><li><a href="uslugi.html">Usługi</a></li><li><span aria-current="page">Audyt e-commerce</span></li></ol></nav><div class="adfg-hero-in"><h1 class="adfg-h1">Audyt <span class="adfg-nw">e-commerce</span> - kampanie, sklep i rentowność</h1><p class="adfg-lead">Twoje reklamy „nie sprzedają”? A może strona nie jest tak skuteczna, jak miała być? Audyt pokazuje, co blokuje Twój wzrost online, i daje plan, jak wyciągnąć maksimum z inwestycji w marketing.</p><div class="adfg-cta-row"><a class="adfg-btn" href="darmowa-konsultacja.html">Zapytaj o audyt</a><a class="adfg-btn adfg-btn--ghost" href="#adfg-warianty">Zobacz zakres</a></div><p class="adfg-hero-badge"><strong>7-10 dni</strong><span>roboczych trwa zwykle audyt na starcie współpracy</span></p></div></div></section>
-<section class="wp-section alignfull adfg-s adfg-glow-a" data-type="section-component" aria-labelledby="adfg-po-co"><div class="wp-content-wrap" data-type="content-area-component"><h2 class="adfg-h2" id="adfg-po-co">Co zyskujesz dzięki audytowi</h2><div class="adfg-grid adfg-grid--3 adfg-mt"><div class="adfg-card"><h3 class="adfg-h3">Wąskie gardła</h3><p class="adfg-small">Nawet małe problemy mają duży wpływ na wyniki. Wiesz, które elementy strony i kampanii poprawić najpierw.</p></div><div class="adfg-card"><h3 class="adfg-h3">Mniej przepalonego budżetu</h3><p class="adfg-small">Wiesz, które kampanie działają, a które wymagają zmian, więc przestajesz przepalać budżet.</p></div><div class="adfg-card"><h3 class="adfg-h3">Lepsze doświadczenie klienta</h3><p class="adfg-small">Wskazujemy obszary, które prowadzą do wyższej konwersji i lepszego zaangażowania.</p></div><div class="adfg-card"><h3 class="adfg-h3">Wyższa konwersja</h3><p class="adfg-small">Więcej wizyt zamienia się w transakcje.</p></div><div class="adfg-card"><h3 class="adfg-h3">Decyzje na danych</h3><p class="adfg-small">Dane z Google Ads, Meta Ads i strony pomagają podejmować lepsze decyzje o strategii.</p></div><div class="adfg-card"><h3 class="adfg-h3">Przewaga nad konkurencją</h3><p class="adfg-small">Regularne audyty pozwalają szybciej reagować na zmiany rynku.</p></div></div></div></section>
-<section class="wp-section alignfull adfg-s " data-type="section-component" aria-labelledby="adfg-sprawdzamy"><div class="wp-content-wrap" data-type="content-area-component"><div class="adfg-intro"><h2 class="adfg-h2" id="adfg-sprawdzamy">Co sprawdzamy - 3 etapy</h2></div><ol class="adfg-steps adfg-steps--3"><li class="adfg-step"><h3 class="adfg-h3">Audyt strony</h3><p class="adfg-small">Wydajność i użyteczność: czas ładowania, wersja mobilna, wezwania do działania i przejrzystość ścieżki zakupowej.</p></li><li class="adfg-step"><h3 class="adfg-h3">Audyt kampanii</h3><p class="adfg-small">Google Ads i Meta Ads: trafienie do grup odbiorców, jakość kampanii, wyniki i skalowanie.</p></li><li class="adfg-step"><h3 class="adfg-h3">Rekomendacje i plan</h3><p class="adfg-small">Konkretne zalecenia i plan działania. Wdrożysz je sam albo zrobimy to razem w ramach współpracy.</p></li></ol></div></section>
-<section class="wp-section alignfull adfg-s adfg-glow-b" data-type="section-component" aria-labelledby="adfg-warianty"><div class="wp-content-wrap" data-type="content-area-component"><div class="adfg-intro"><h2 class="adfg-h2 adfg-h2--wide" id="adfg-warianty">Trzy warianty audytu</h2><p class="adfg-lead">Zakres dobieramy do sytuacji sklepu. Wycenę podajemy po krótkiej rozmowie <span class="adfg-dp">[DO POTWIERDZENIA: decyzja o cenach na stronie]</span></p></div><div class="adfg-grid adfg-grid--3"><article class="adfg-card"><h3 class="adfg-h3">Audyt reklam</h3><p class="adfg-small">Jedno konto reklamowe (Google Ads lub Meta Ads). Skuteczność, budżet i targetowanie z działaniami naprawczymi.</p><ul class="adfg-list"><li>analiza konta Google Ads lub Meta Ads</li><li>ocena struktury kampanii</li><li>ocena rentowności i budżetu</li><li>ocena targetowania i konwersji</li><li>rekomendacje działań naprawczych</li></ul><p class="adfg-card-foot"><a class="adfg-btn adfg-btn--ghost adfg-btn--sm" href="darmowa-konsultacja.html">Zapytaj o audyt reklam</a></p></article><article class="adfg-card"><h3 class="adfg-h3">Kompleksowy audyt</h3><p class="adfg-small">Strona i konta reklamowe razem, z rekomendacjami dla strony i kampanii.</p><ul class="adfg-list"><li>dwa konta reklamowe</li><li>pełny audyt Google Ads i Meta Ads</li><li>pełny audyt strony internetowej</li><li>analiza całej ścieżki klienta</li><li>kompleksowy plan poprawy wyników</li></ul><p class="adfg-card-foot"><a class="adfg-btn adfg-btn--ghost adfg-btn--sm" href="darmowa-konsultacja.html">Zapytaj o kompleksowy audyt</a></p></article><article class="adfg-card"><h3 class="adfg-h3">Audyt strony</h3><p class="adfg-small">Wydajność, UX i UI oraz wersja mobilna. Rekomendacje dla prędkości, użyteczności i konwersji.</p><ul class="adfg-list"><li>analiza strony internetowej</li><li>rekomendacje UX i UI</li><li>ocena prędkości ładowania</li><li>ocena wersji mobilnej</li><li>plan poprawy konwersji</li></ul><p class="adfg-card-foot"><a class="adfg-btn adfg-btn--ghost adfg-btn--sm" href="darmowa-konsultacja.html">Zapytaj o audyt strony</a></p></article></div></div></section>
+<section class="wp-section alignfull adfg-s adfg-glow-a" data-type="section-component" aria-labelledby="adfg-po-co"><div class="wp-content-wrap" data-type="content-area-component"><h2 class="adfg-h2" id="adfg-po-co">Co zyskujesz dzięki audytowi</h2><div class="adfg-grid adfg-grid--3 adfg-mt"><div class="adfg-card adfg-hov"><span class="adfg-ico adfg-ico--loupe adfg-ico--s52"><img src="img/ikona-loupe.webp" alt="" width="200" height="200" loading="lazy" decoding="async"></span><h3 class="adfg-h3">Wąskie gardła</h3><p class="adfg-small">Nawet małe problemy mają duży wpływ na wyniki. Wiesz, które elementy strony i kampanii poprawić najpierw.</p></div><div class="adfg-card adfg-hov"><span class="adfg-ico adfg-ico--fire adfg-ico--s52"><img src="img/ikona-fire.webp" alt="" width="200" height="200" loading="lazy" decoding="async"></span><h3 class="adfg-h3">Mniej przepalonego budżetu</h3><p class="adfg-small">Wiesz, które kampanie działają, a które wymagają zmian, więc przestajesz przepalać budżet.</p></div><div class="adfg-card adfg-hov"><span class="adfg-ico adfg-ico--shake adfg-ico--s52"><img src="img/ikona-handshake.webp" alt="" width="200" height="200" loading="lazy" decoding="async"></span><h3 class="adfg-h3">Lepsze doświadczenie klienta</h3><p class="adfg-small">Wskazujemy obszary, które prowadzą do wyższej konwersji i lepszego zaangażowania.</p></div><div class="adfg-card adfg-hov"><span class="adfg-ico adfg-ico--hammer adfg-ico--s52"><img src="img/ikona-hammer.webp" alt="" width="200" height="200" loading="lazy" decoding="async"></span><h3 class="adfg-h3">Wyższa konwersja</h3><p class="adfg-small">Więcej wizyt zamienia się w transakcje.</p></div><div class="adfg-card adfg-hov"><span class="adfg-ico adfg-ico--turn adfg-ico--s52"><img src="img/ikona-calosciowe_spojrzenie.webp" alt="" width="200" height="200" loading="lazy" decoding="async"></span><h3 class="adfg-h3">Decyzje na danych</h3><p class="adfg-small">Dane z Google Ads, Meta Ads i strony pomagają podejmować lepsze decyzje o strategii.</p></div><div class="adfg-card adfg-hov"><span class="adfg-ico adfg-ico--nudge adfg-ico--s52"><img src="img/ikona-strategia.webp" alt="" width="200" height="200" loading="lazy" decoding="async"></span><h3 class="adfg-h3">Przewaga nad konkurencją</h3><p class="adfg-small">Regularne audyty pozwalają szybciej reagować na zmiany rynku.</p></div></div></div></section>
+<section class="wp-section alignfull adfg-s " data-type="section-component" aria-labelledby="adfg-sprawdzamy"><div class="wp-content-wrap" data-type="content-area-component"><div class="adfg-intro"><h2 class="adfg-h2" id="adfg-sprawdzamy">Co sprawdzamy - 3 etapy</h2></div><ol class="adfg-timeline"><li class="adfg-tl-glow" aria-hidden="true"></li><li class="adfg-tl-item"><p class="adfg-tl-time">Etap 1</p><h3 class="adfg-h3">Audyt strony</h3><p class="adfg-small">Wydajność i użyteczność: czas ładowania, wersja mobilna, wezwania do działania i przejrzystość ścieżki zakupowej.</p></li><li class="adfg-tl-item"><p class="adfg-tl-time">Etap 2</p><h3 class="adfg-h3">Audyt kampanii</h3><p class="adfg-small">Google Ads i Meta Ads: trafienie do grup odbiorców, jakość kampanii, wyniki i skalowanie.</p></li><li class="adfg-tl-item"><p class="adfg-tl-time">Etap 3</p><h3 class="adfg-h3">Rekomendacje i plan</h3><p class="adfg-small">Konkretne zalecenia i plan działania. Wdrożysz je sam albo zrobimy to razem w ramach współpracy.</p></li></ol></div></section>
+<section class="wp-section alignfull adfg-s adfg-glow-b" data-type="section-component" aria-labelledby="adfg-warianty"><div class="wp-content-wrap" data-type="content-area-component"><div class="adfg-intro"><h2 class="adfg-h2 adfg-h2--wide" id="adfg-warianty">Trzy warianty audytu</h2><p class="adfg-lead">Każdy audyt, niezależnie od wybranej opcji, kończy się szczegółowym raportem.<span data-do-potwierdzenia="8" hidden></span></p></div><div class="adfg-grid adfg-grid--3"><article class="adfg-card"><h3 class="adfg-h3">Audyt reklam</h3><p class="adfg-small">Jedno konto reklamowe (Google Ads lub Meta Ads). Skuteczność, budżet i targetowanie z działaniami naprawczymi.</p><ul class="adfg-list"><li>analiza konta Google Ads lub Meta Ads</li><li>ocena struktury kampanii</li><li>ocena rentowności i budżetu</li><li>ocena targetowania i konwersji</li><li>rekomendacje działań naprawczych</li></ul><p class="adfg-card-foot"><a class="adfg-btn adfg-btn--ghost adfg-btn--sm" href="darmowa-konsultacja.html">Zapytaj o audyt reklam</a></p></article><article class="adfg-card"><h3 class="adfg-h3">Kompleksowy audyt</h3><p class="adfg-small">Strona i konta reklamowe razem, z rekomendacjami dla strony i kampanii.</p><ul class="adfg-list"><li>dwa konta reklamowe</li><li>pełny audyt Google Ads i Meta Ads</li><li>pełny audyt strony internetowej</li><li>analiza całej ścieżki klienta</li><li>kompleksowy plan poprawy wyników</li></ul><p class="adfg-card-foot"><a class="adfg-btn adfg-btn--ghost adfg-btn--sm" href="darmowa-konsultacja.html">Zapytaj o kompleksowy audyt</a></p></article><article class="adfg-card"><h3 class="adfg-h3">Audyt strony</h3><p class="adfg-small">Wydajność, UX i UI oraz wersja mobilna. Rekomendacje dla prędkości, użyteczności i konwersji.</p><ul class="adfg-list"><li>analiza strony internetowej</li><li>rekomendacje UX i UI</li><li>ocena prędkości ładowania</li><li>ocena wersji mobilnej</li><li>plan poprawy konwersji</li></ul><p class="adfg-card-foot"><a class="adfg-btn adfg-btn--ghost adfg-btn--sm" href="darmowa-konsultacja.html">Zapytaj o audyt strony</a></p></article></div></div></section>
 <section class="wp-section alignfull adfg-s adfg-glow-a" data-type="section-component" aria-labelledby="adfg-dostajesz"><div class="wp-content-wrap" data-type="content-area-component"><div class="adfg-split adfg-split--rev"><div><h2 class="adfg-h2" id="adfg-dostajesz">Co dostajesz po audycie</h2><p class="adfg-lead">Każdy audyt, niezależnie od wariantu, kończy się dwoma dokumentami.</p><div class="adfg-problems"><div class="adfg-problem"><h3 class="adfg-h3">Raport PDF</h3><p class="adfg-muted">Wyniki, wnioski i zalecenia. Najważniejsze wskaźniki i problemy do naprawy, podane jasno i zrozumiale.</p></div><div class="adfg-problem"><h3 class="adfg-h3">Plan działań w Excelu</h3><p class="adfg-muted">Lista zadań z priorytetami i szacunkowym wpływem na wyniki. Ułatwia śledzenie postępów i zarządzanie wdrożeniem.</p></div><div class="adfg-problem"><h3 class="adfg-h3">Wsparcie we wdrożeniu</h3><p class="adfg-muted">Jeśli potrzebujesz pomocy, wdrażamy i monitorujemy zmiany z audytu w ramach współpracy.</p></div></div></div><figure class="adfg-split-media"><img src="img/Gemini_Generated_Image_nsucensucensucen.webp" alt="Kowadło w ciemnej kuźni oświetlone żarem paleniska" width="1400" height="1400" loading="lazy" decoding="async"></figure></div></div></section>
 <section class="wp-section alignfull adfg-s " data-type="section-component" aria-labelledby="adfg-opinie"><div class="wp-content-wrap" data-type="content-area-component"><h2 class="adfg-h2" id="adfg-opinie">Co mówią klienci po audycie</h2><div class="adfg-mt"><div class="adfg-quotes adfg-quotes--2"><figure class="adfg-quote"><p class="adfg-stars" aria-hidden="true">★★★★★</p><blockquote><p>AD FORGE przeprowadziło mi audyt i analizę strony w kontekście GA4. To zespół profesjonalistów, który potrafi wyjaśnić złożone rzeczy w prosty i obrazowy sposób. Komunikacja na najwyższym poziomie (...)</p></blockquote><figcaption><img src="img/opinia-lukasz-olender.webp" alt="Zdjęcie: Łukasz Olender" width="96" height="96" loading="lazy" decoding="async"><span><span class="adfg-quote-name">Łukasz Olender</span><span class="adfg-quote-role">Co Founder / Degen House</span></span></figcaption></figure><figure class="adfg-quote"><p class="adfg-stars" aria-hidden="true">★★★★★</p><blockquote><p>Bardzo polecam współpracę z Kamilem: świetna komunikacja, profesjonalne podejście i fachowe wsparcie. Zarówno w kwestii Google Analytics, jak i Google Ads mogłem otrzymać szczegółowe (...)</p></blockquote><figcaption><img src="img/opinia-kamil-lelonek.webp" alt="Zdjęcie: Kamil Lelonek" width="96" height="96" loading="lazy" decoding="async"><span><span class="adfg-quote-name">Kamil Lelonek</span><span class="adfg-quote-role">Hack Your Brain</span></span></figcaption></figure></div></div></div></section>
 <section class="wp-section alignfull adfg-s adfg-glow-a" data-type="section-component" aria-labelledby="adfg-faq-h"><div class="wp-content-wrap" data-type="content-area-component"><h2 class="adfg-h2" id="adfg-faq-h">Pytania o audyt</h2><div class="adfg-faq"><details><summary>Jak wygląda proces współpracy z AdForge?</summary><div class="adfg-faq-a"><p>Współpraca zaczyna się od audytu. Analizujemy fundamenty Twojego biznesu, wskazujemy obszary do poprawy rentowności i tworzymy plan działania. Cały proces trwa zwykle 7-10 dni roboczych. Po akceptacji planu przechodzimy do wdrożenia: najpierw naprawa fundamentów biznesowych, potem optymalizacja działań marketingowych.</p></div></details><details><summary>Czy muszę zrezygnować z obecnej agencji lub marketera?</summary><div class="adfg-faq-a"><p>Niekoniecznie. Możemy działać jako strategiczny partner, który doradza Twojemu obecnemu zespołowi. Audyt przyda się także wtedy, gdy wykonanie rekomendacji powierzysz swoim ludziom. Ważne, żeby wszyscy akceptowali podejście skoncentrowane na rentowności.</p></div></details><details><summary>Co, jeśli mój biznes nie kwalifikuje się do współpracy?</summary><div class="adfg-faq-a"><p>Dostaniesz od nas konkretne wskazówki, co poprawić, żeby współpraca była możliwa w przyszłości. W niektórych przypadkach polecamy sprawdzonych partnerów, którzy pomogą z problemami spoza naszego zakresu.</p></div></details></div><div class="adfg-mt-lg"><h2 class="adfg-h3">Pozostałe usługi</h2><ul class="adfg-list"><li><a class="adfg-link" href="performance-marketing.html">Performance marketing</a></li><li><a class="adfg-link" href="google-ads-dla-e-commerce.html">Google Ads dla e-commerce</a></li><li><a class="adfg-link" href="meta-ads-dla-e-commerce.html">Meta Ads dla e-commerce</a></li><li><a class="adfg-link" href="cro.html">Optymalizacja konwersji (CRO)</a></li><li><a class="adfg-link" href="strategia.html">Zewnętrzny CMO i strategia</a></li></ul></div></div></section>
 <section class="wp-section alignfull adfg-s adfg-cta" data-type="section-component"><div class="wp-content-wrap" data-type="content-area-component"><div class="adfg-band"><div><h2 class="adfg-h2 adfg-h2--wide">Sprawdź, gdzie tracisz zysk</h2><p class="adfg-lead">Umów bezpłatną, 30-minutową konsultację strategiczną. Wspólnie ocenimy potencjał wzrostu rentowności Twojego e-commerce.</p><p class="adfg-limit">Limit 25 klientów w agencji</p></div><div><a class="adfg-btn" href="darmowa-konsultacja.html">Umów konsultację</a></div></div></div></section>
 </main>
-<footer class="wp-section alignfull adfg-s adfg-footer" data-type="section-component"><div class="wp-content-wrap" data-type="content-area-component"><div class="adfg-foot-grid"><div><img src="img/logo-adforge-white.webp" alt="AdForge" width="600" height="246" class="adfg-foot-logo" loading="lazy" decoding="async"><p class="adfg-small">Skalujemy zysk, nie tylko przychód. Google Ads, Meta Ads, optymalizacja konwersji i strategia dla e-commerce i info-biznesu.</p><p class="adfg-small">Limit 25 klientów w agencji.</p></div><div><h2 class="adfg-foot-title">Usługi</h2><ul class="adfg-foot-list"><li><a href="performance-marketing.html">Performance marketing</a></li><li><a href="google-ads-dla-e-commerce.html">Google Ads dla e-commerce</a></li><li><a href="meta-ads-dla-e-commerce.html">Meta Ads dla e-commerce</a></li><li><a href="cro.html">Optymalizacja konwersji (CRO)</a></li><li><a href="audyt.html">Audyt e-commerce</a></li><li><a href="strategia.html">Zewnętrzny CMO i strategia</a></li></ul></div><div><h2 class="adfg-foot-title">AdForge</h2><ul class="adfg-foot-list"><li><a href="case-studies.html">Case studies</a></li><li><a href="o-nas.html">O nas</a></li><li><a href="opinie.html">Opinie</a></li><li><a href="https://adforge.pl/wiedza/">Baza wiedzy</a></li><li><a href="https://adforge.pl/ebook/">Ebook i checklista</a></li><li><a href="darmowa-konsultacja.html">Darmowa konsultacja</a></li></ul></div><div><h2 class="adfg-foot-title">Kontakt</h2><ul class="adfg-foot-list"><li><a href="mailto:kamil@adforge.pl">kamil@adforge.pl</a></li><li><span class="adfg-small">E-mail Oskara <span class="adfg-dp">[DO POTWIERDZENIA]</span></span></li><li><a href="https://www.instagram.com/adforgepl/">Instagram</a></li><li><a href="https://www.linkedin.com/company/adforge/">LinkedIn</a></li><li><span class="adfg-small">Facebook <span class="adfg-dp">[DO POTWIERDZENIA: adres profilu]</span></span></li></ul></div></div><div class="adfg-foot-bottom"><span>Adforge sp. z o.o. Adres i NIP <span class="adfg-dp">[DO POTWIERDZENIA]</span></span><span><a href="https://adforge.pl/polityka-prywatnosci/">Polityka prywatności</a> &nbsp; <a href="https://adforge.pl/regulamin/">Regulamin</a></span></div></div></footer>
+<footer class="wp-section alignfull adfg-s adfg-footer" data-type="section-component"><div class="wp-content-wrap" data-type="content-area-component"><div class="adfg-foot-grid"><div><img src="img/logo-adforge-white.webp" alt="AdForge" width="600" height="246" class="adfg-foot-logo" loading="lazy" decoding="async"><p class="adfg-small">Skalujemy zysk, nie tylko przychód. Google Ads, Meta Ads, optymalizacja konwersji i strategia dla e-commerce i info-biznesu.</p><p class="adfg-small">Limit 25 klientów w agencji.</p></div><div><h2 class="adfg-foot-title">Usługi</h2><ul class="adfg-foot-list"><li><a href="performance-marketing.html">Performance marketing</a></li><li><a href="google-ads-dla-e-commerce.html">Google Ads dla e-commerce</a></li><li><a href="meta-ads-dla-e-commerce.html">Meta Ads dla e-commerce</a></li><li><a href="cro.html">Optymalizacja konwersji (CRO)</a></li><li><a href="audyt.html">Audyt e-commerce</a></li><li><a href="strategia.html">Zewnętrzny CMO i strategia</a></li></ul></div><div><h2 class="adfg-foot-title">AdForge</h2><ul class="adfg-foot-list"><li><a href="case-studies.html">Case studies</a></li><li><a href="o-nas.html">O nas</a></li><li><a href="opinie.html">Opinie</a></li><li><a href="https://adforge.pl/wiedza/">Baza wiedzy</a></li><li><a href="https://adforge.pl/ebook/">Ebook i checklista</a></li><li><a href="darmowa-konsultacja.html">Darmowa konsultacja</a></li></ul></div><div><h2 class="adfg-foot-title">Kontakt</h2><ul class="adfg-foot-list"><li><a href="mailto:kamil@adforge.pl">kamil@adforge.pl</a></li><li hidden><span data-do-potwierdzenia="12" hidden></span></li><li><a href="https://www.instagram.com/adforgepl/">Instagram</a></li><li><a href="https://www.linkedin.com/company/adforge/">LinkedIn</a></li><li hidden><span data-do-potwierdzenia="13" hidden></span></li></ul></div></div><div class="adfg-foot-bottom"><span>© 2024-2026 Adforge<span data-do-potwierdzenia="14" hidden></span></span><span><a href="https://adforge.pl/polityka-prywatnosci/">Polityka prywatności</a> &nbsp; <a href="https://adforge.pl/regulamin/">Regulamin</a></span><span>Wdrożenie: <a href="https://danieljeziorski.pl">Daniel Jeziorski</a></span></div><details class="adfg-float adfg-cookies"><summary><span class="adfg-vh">Ustawienia plików cookies</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12.5A9 9 0 1 1 11.5 3a3 3 0 0 0 3.5 3.5 3 3 0 0 0 3 3 3 3 0 0 0 3 3z"/><circle cx="8.5" cy="10" r="1"/><circle cx="12" cy="15.5" r="1"/><circle cx="7.5" cy="15" r="0.8"/><circle cx="15.5" cy="12" r="0.8"/></svg></summary><div class="adfg-cookies-panel"><p>Ustawieniami plików cookies zarządza baner zgód. W makiecie to podgląd: po wdrożeniu ten przycisk otworzy ponownie baner wtyczki zgód.</p></div></details><a class="adfg-float adfg-float-btn adfg-totop" href="#adfg-top"><span class="adfg-vh">Wróć na górę strony</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 14l6-6 6 6"/></svg></a></div></footer>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://adforge.pl/#organization", "name": "AdForge", "legalName": "Adforge sp. z o.o.", "url": "https://adforge.pl/", "logo": "https://adforge.pl/wp-content/uploads/2025/02/Logo_white-1.png", "email": "kamil@adforge.pl", "member": [{"@id": "https://kamilkocik.pl/#person"}, {"@id": "https://adforge.pl/#oskar-mazur"}], "sameAs": ["https://www.instagram.com/adforgepl/", "https://www.linkedin.com/company/adforge/"], "knowsAbout": ["Google Ads", "Meta Ads", "Optymalizacja konwersji", "Unit economics", "E-commerce"]}, {"@type": "Person", "@id": "https://kamilkocik.pl/#person", "name": "Kamil Kocik", "url": "https://kamilkocik.pl", "memberOf": {"@id": "https://adforge.pl/#organization"}}, {"@type": "Person", "@id": "https://adforge.pl/#oskar-mazur", "name": "Oskar Mazur", "memberOf": {"@id": "https://adforge.pl/#organization"}}, {"@type": "Service", "name": "Audyt e-commerce", "serviceType": "Audyt kampanii reklamowych i sklepu internetowego", "url": "https://adforge.pl/audyt/", "provider": {"@id": "https://adforge.pl/#organization"}, "areaServed": {"@type": "Country", "name": "Polska"}, "audience": {"@type": "BusinessAudience", "audienceType": "Sklepy internetowe i biznesy cyfrowe"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://adforge.pl/"}, {"@type": "ListItem", "position": 2, "name": "Usługi", "item": "https://adforge.pl/uslugi/"}, {"@type": "ListItem", "position": 3, "name": "Audyt e-commerce", "item": "https://adforge.pl/audyt/"}]}]}</script>
 <script data-wp-block-html="js">
 (function(){
@@ -411,9 +629,26 @@
     if(!btn||!nav){return;}
     h.classList.add('adfg-js');
     var lab=btn.querySelector('.adfg-menu-label');
-    function setOpen(o){h.classList.toggle('adfg-open',o);btn.setAttribute('aria-expanded',o?'true':'false');if(lab){lab.textContent=o?'Zamknij':'Menu';}}
+    function setOpen(o){h.classList.toggle('adfg-open',o);btn.setAttribute('aria-expanded',o?'true':'false');if(lab){lab.textContent=o?'Zamknij menu':'Menu';}}
+    function onScroll(){h.classList.toggle('adfg-fixed',window.scrollY>140);}
+    window.addEventListener('scroll',onScroll,{passive:true});onScroll();
     btn.addEventListener('click',function(){setOpen(btn.getAttribute('aria-expanded')!=='true');});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&h.classList.contains('adfg-open')){setOpen(false);btn.focus();}});
+  });
+
+  document.querySelectorAll('.adfg-marquee-wrap').forEach(function(w){
+    var b=w.querySelector('.adfg-marquee-btn');
+    if(!b){return;}
+    w.classList.add('adfg-js');
+    b.addEventListener('click',function(){var p=w.classList.toggle('adfg-paused');b.setAttribute('aria-pressed',p?'true':'false');b.textContent=p?'Wznów przesuwanie':'Zatrzymaj przesuwanie';});
+  });
+
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.adfg-totop').forEach(function(t){
+    t.classList.add('adfg-js');
+    function upd(){t.classList.toggle('adfg-show',window.scrollY>600);}
+    window.addEventListener('scroll',upd,{passive:true});upd();
+    t.addEventListener('click',function(e){var top=document.getElementById('adfg-top');e.preventDefault();window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});if(top){top.setAttribute('tabindex','-1');top.focus({preventScroll:true});}});
   });
 
   document.querySelectorAll('.adfg-ff').forEach(function(f){
